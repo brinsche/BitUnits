@@ -1,7 +1,15 @@
 import XCTest
 @testable import ByteUnits
 
-class Tests: XCTestCase {
+class Tests: XCTestCase, XCTestCaseProvider {
+  var allTests : [(String, () -> Void)] {
+        return [
+            ("testRawValues", testRawValues),
+            ("testBitConversions", testBitConversions),
+            ("testBinaryConversions", testBinaryConversions)
+            // Other tests go here
+        ]
+    }
 
   func testRawValues() {
     XCTAssertEqual(1, BitUnit.Bit.rawValue)
