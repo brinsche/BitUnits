@@ -58,19 +58,17 @@ enum BitUnit: UInt {
       }
     }
 
-    private static func unitArray(unitType: BitUnitType) -> [BitUnit] {
-      switch (unitType) {
-        case BitUnitType.BitUnit: return bitunits
-        case BitUnitType.BinaryBitUnit: return byteunits
-      }
-    }
-
-    private static var bitunits: [BitUnit] {
-      return [.Bit, .Kilobit, .Megabit, .Gigabit, .Terabit, .Petabit]
-    }
-
-    private static var byteunits: [BitUnit] {
-      return [.Bit, .Kibibit, .Mebibit, .Gibibit, .Tebibit, .Pebibit]
+    var unitType: BitUnitType { //Bäh!!
+        switch self {
+        case .Bit, .Kilobit, .Megabit, .Gigabit, .Terabit, .Petabit:
+            return .DecimalBitUnit
+        case .Kibibit, .Mebibit, .Gibibit, .Tebibit, .Pebibit:
+            return .BinaryBitUnit
+        case .Byte, .Kilobyte, .Megabyte, .Gigabyte, .Terabyte, .Petabyte:
+            return .DecimalByteUnit
+        case .Kibibyte, .Mebibyte, .Gibibyte, .Tebibyte, .Pebibyte:
+            return .BinaryByteUnit
+        }
     }
 
     private static var defaultFormatter: NSNumberFormatter {
@@ -91,7 +89,7 @@ enum BitUnit: UInt {
       }
     }
 
-    //Think about returning an optional here
+    //TODO Think about returning an optional here
     static func convert(count: Int, from: BitUnit, to: BitUnit) -> UInt? {
       guard (count >= 0) else {
         return nil
@@ -99,21 +97,61 @@ enum BitUnit: UInt {
       return convert(UInt(count), from: from, to: to)
     }
 
-    static func format(count: Int, unit: BitUnit = .Bit, unitType: BitUnitType = .BitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
-      var unitIndex = bitunits.indexOf(unit)!
-      var count2 = Double(count)
-      let stepSize = unitType.rawValue
-      let unitArray = BitUnit.unitArray(unitType)
-      while (count2 >= stepSize && unitIndex < bitunits.count-1) {
-        count2 /= stepSize
-        unitIndex += 1
-      }
-      return "\(formatter.stringFromNumber(count2)!) \(unitArray[unitIndex].abbreviation)"
+    static func format(var count: UInt, var unit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
+        if unit.unitType != targetUnitType {
+            if targetUnitType == .BinaryByteUnit || targetUnitType == .DecimalByteUnit {
+                count = convert(count, from: unit, to: .Byte)
+                unit = .Byte
+            } else {
+                count = convert(count, from: unit, to: .Bit)
+                unit = .Bit
+            }
+        }
+
+        let unitArray = targetUnitType.units
+
+        var unitIndex = unitArray.indexOf(unit)!
+        var remainder = Double(count)
+
+        while remainder >= targetUnitType.stepSize && unitIndex < unitArray.count - 1 {
+            remainder /= targetUnitType.stepSize
+            unitIndex += 1
+        }
+        return "\(formatter.stringFromNumber(remainder)!) \(unitArray[unitIndex].abbreviation)"
+    }
+
+    static func format(count: Int, unit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
+        guard count >= 0 else {
+            return nil
+        }
+        return format(UInt(count), unit: unit, targetUnitType: targetUnitType, formatter: formatter)
     }
 
 }
 
-enum BitUnitType: Double {
-    case BitUnit = 1000
-    case BinaryBitUnit = 1024
+enum BitUnitType {
+    case DecimalBitUnit, DecimalByteUnit
+    case BinaryBitUnit, BinaryByteUnit
+
+    var stepSize: Double {
+        switch self {
+        case .DecimalBitUnit, .DecimalByteUnit:
+            return 1000
+        case .BinaryBitUnit, .BinaryByteUnit:
+            return 1024
+        }
+    }
+
+    var units: [BitUnit] {
+        switch self {
+        case .DecimalBitUnit:
+            return [.Bit, .Kilobit, .Megabit, .Gigabit, .Terabit, .Petabit]
+        case .BinaryBitUnit:
+            return [.Bit, .Kibibit, .Mebibit, .Gibibit, .Tebibit, .Pebibit]
+        case .DecimalByteUnit:
+            return [.Byte, .Kilobyte, .Megabyte, .Gigabyte, .Terabyte, .Petabyte]
+        case .BinaryByteUnit:
+            return [.Byte, .Kibibyte, .Mebibyte, .Gibibyte, .Tebibyte, .Pebibyte]
+        }
+    }
 }
