@@ -6,7 +6,9 @@ class Tests: XCTestCase, XCTestCaseProvider {
         return [
             ("testRawValues", testRawValues),
             ("testBitConversions", testBitConversions),
-            ("testBinaryConversions", testBinaryConversions)
+            ("testBinaryConversions", testBinaryConversions),
+            ("testStringFormatting", testStringFormatting),
+            ("testAbbreviations", testAbbreviations)
             // Other tests go here
         ]
     }
@@ -123,6 +125,53 @@ class Tests: XCTestCase, XCTestCaseProvider {
       XCTAssertEqual(i * 1048576, BitUnit.convert(i, from: .Pebibyte, to: .Gibibyte))
       XCTAssertEqual(i * 1024, BitUnit.convert(i, from: .Pebibyte, to: .Tebibyte))
     }
+  }
+
+  func testStringFormatting() {
+    //TODO test all units
+    let formatter = NSNumberFormatter()
+    formatter.minimumFractionDigits = 0
+    formatter.maximumFractionDigits = 1
+    formatter.locale = NSLocale(localeIdentifier: "en_US")
+
+    XCTAssertEqual("0 b", BitUnit.format(0, formatter: formatter))
+    XCTAssertEqual("1 b", BitUnit.format(1, formatter: formatter))
+    XCTAssertEqual("1 kb", BitUnit.format(1000, formatter: formatter))
+    XCTAssertEqual("1 kb", BitUnit.format(1001, formatter: formatter))
+    XCTAssertEqual("16 kb", BitUnit.format(16_000, formatter: formatter))
+    XCTAssertEqual("1.2 Mb", BitUnit.format(1_177_171, formatter: formatter))
+    XCTAssertEqual("1.2 Gb", BitUnit.format(1_200_000_000, formatter: formatter))
+    XCTAssertEqual("9223.4 Pb", BitUnit.format(Int.max, formatter: formatter))
+    XCTAssertEqual("3 Mb", BitUnit.format(3000, unit: .Kilobit, formatter: formatter))
+    XCTAssertEqual("3 Kib", BitUnit.format(3072, unitType: .BinaryBitUnit, formatter: formatter))
+  }
+
+  func testAbbreviations() {
+    XCTAssertEqual("b", BitUnit.Bit.abbreviation)
+    XCTAssertEqual("kb", BitUnit.Kilobit.abbreviation)
+    XCTAssertEqual("Mb", BitUnit.Megabit.abbreviation)
+    XCTAssertEqual("Gb", BitUnit.Gigabit.abbreviation)
+    XCTAssertEqual("Tb", BitUnit.Terabit.abbreviation)
+    XCTAssertEqual("Pb", BitUnit.Petabit.abbreviation)
+
+    XCTAssertEqual("B", BitUnit.Byte.abbreviation)
+    XCTAssertEqual("kB", BitUnit.Kilobyte.abbreviation)
+    XCTAssertEqual("MB", BitUnit.Megabyte.abbreviation)
+    XCTAssertEqual("GB", BitUnit.Gigabyte.abbreviation)
+    XCTAssertEqual("TB", BitUnit.Terabyte.abbreviation)
+    XCTAssertEqual("PB", BitUnit.Petabyte.abbreviation)
+
+    XCTAssertEqual("Kib", BitUnit.Kibibit.abbreviation)
+    XCTAssertEqual("Mib", BitUnit.Mebibit.abbreviation)
+    XCTAssertEqual("Gib", BitUnit.Gibibit.abbreviation)
+    XCTAssertEqual("Tib", BitUnit.Tebibit.abbreviation)
+    XCTAssertEqual("Pib", BitUnit.Pebibit.abbreviation)
+
+    XCTAssertEqual("KiB", BitUnit.Kibibyte.abbreviation)
+    XCTAssertEqual("MiB", BitUnit.Mebibyte.abbreviation)
+    XCTAssertEqual("GiB", BitUnit.Gibibyte.abbreviation)
+    XCTAssertEqual("TiB", BitUnit.Tebibyte.abbreviation)
+    XCTAssertEqual("PiB", BitUnit.Pebibyte.abbreviation)
   }
 
 }
