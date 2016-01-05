@@ -1,7 +1,6 @@
 import Foundation
 
 enum BitUnit: UInt {
-    //TODO: Try to do this with 1024^x etc
     case Bit  = 1
     case Kilobit = 1000
     case Megabit = 1000000
@@ -28,37 +27,7 @@ enum BitUnit: UInt {
     case Tebibyte = 8796093022208
     case Pebibyte = 9007199254740992
     
-    var abbreviation: String {
-        switch (self) {
-        case Bit: return "b"
-        case Kilobit: return "kb"
-        case Megabit: return "Mb"
-        case Gigabit: return "Gb"
-        case Terabit: return "Tb"
-        case Petabit: return "Pb"
-            
-        case Byte: return "B"
-        case Kilobyte: return "kB"
-        case Megabyte: return "MB"
-        case Gigabyte: return "GB"
-        case Terabyte: return "TB"
-        case Petabyte: return "PB"
-            
-        case Kibibit: return "Kib"
-        case Mebibit: return "Mib"
-        case Gibibit: return "Gib"
-        case Tebibit: return "Tib"
-        case Pebibit: return "Pib"
-            
-        case Kibibyte: return "KiB"
-        case Mebibyte: return "MiB"
-        case Gibibyte: return "GiB"
-        case Tebibyte: return "TiB"
-        case Pebibyte: return "PiB"
-        }
-    }
-    
-    var unitType: BitUnitType { //Bäh!!
+    var type: BitUnitType {
         switch self {
         case .Bit, .Kilobit, .Megabit, .Gigabit, .Terabit, .Petabit:
             return .DecimalBitUnit
@@ -97,6 +66,42 @@ enum BitUnit: UInt {
         return convert(UInt(count), from: from, to: to)
     }
     
+}
+
+//MARK: - Formatting
+
+extension BitUnit {
+    
+    var abbreviation: String {
+        switch (self) {
+        case Bit:     return "b"
+        case Kilobit: return "kb"
+        case Megabit: return "Mb"
+        case Gigabit: return "Gb"
+        case Terabit: return "Tb"
+        case Petabit: return "Pb"
+            
+        case Byte:     return "B"
+        case Kilobyte: return "kB"
+        case Megabyte: return "MB"
+        case Gigabyte: return "GB"
+        case Terabyte: return "TB"
+        case Petabyte: return "PB"
+            
+        case Kibibit: return "Kib"
+        case Mebibit: return "Mib"
+        case Gibibit: return "Gib"
+        case Tebibit: return "Tib"
+        case Pebibit: return "Pib"
+            
+        case Kibibyte: return "KiB"
+        case Mebibyte: return "MiB"
+        case Gibibyte: return "GiB"
+        case Tebibyte: return "TiB"
+        case Pebibyte: return "PiB"
+        }
+    }
+    
     static func format(count: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
         let gcUnit = greatestCommonUnit(sourceUnit, targetUnitType)
         var unitArray = targetUnitType.units
@@ -124,7 +129,7 @@ enum BitUnit: UInt {
     }
     
     private static func greatestCommonUnit(sourceUnit: BitUnit, _ targetUnitType: BitUnitType) -> BitUnit {
-        if sourceUnit.unitType == targetUnitType {
+        if sourceUnit.type == targetUnitType {
             return sourceUnit
         } else {
             if targetUnitType == .BinaryByteUnit || targetUnitType == .DecimalByteUnit {
@@ -134,32 +139,6 @@ enum BitUnit: UInt {
             }
         }
     }
-    
+
 }
 
-enum BitUnitType {
-    case DecimalBitUnit, DecimalByteUnit
-    case BinaryBitUnit, BinaryByteUnit
-    
-    var stepSize: Double {
-        switch self {
-        case .DecimalBitUnit, .DecimalByteUnit:
-            return 1000
-        case .BinaryBitUnit, .BinaryByteUnit:
-            return 1024
-        }
-    }
-    
-    var units: [BitUnit] {
-        switch self {
-        case .DecimalBitUnit:
-            return [.Bit, .Kilobit, .Megabit, .Gigabit, .Terabit, .Petabit]
-        case .BinaryBitUnit:
-            return [.Bit, .Kibibit, .Mebibit, .Gibibit, .Tebibit, .Pebibit]
-        case .DecimalByteUnit:
-            return [.Byte, .Kilobyte, .Megabyte, .Gigabyte, .Terabyte, .Petabyte]
-        case .BinaryByteUnit:
-            return [.Byte, .Kibibyte, .Mebibyte, .Gibibyte, .Tebibyte, .Pebibyte]
-        }
-    }
-}

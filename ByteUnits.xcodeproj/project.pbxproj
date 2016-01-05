@@ -11,6 +11,8 @@
 		515785F41C3459CB00DBFC11 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515785F31C3459CB00DBFC11 /* main.swift */; };
 		515785FD1C345A4400DBFC11 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515785FC1C345A4400DBFC11 /* Tests.swift */; };
 		5157860A1C345C1B00DBFC11 /* BitUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515786081C345C1B00DBFC11 /* BitUnit.swift */; };
+		5186C8411C3C12B9000331D8 /* BitUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186C8401C3C12B9000331D8 /* BitUnitType.swift */; };
+		5186C8421C3C131A000331D8 /* BitUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186C8401C3C12B9000331D8 /* BitUnitType.swift */; };
 		51A0AFEC1C3AF76800984823 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A0AFEB1C3AF76800984823 /* XCTestCaseProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,7 @@
 		515785FE1C345A4400DBFC11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		515786021C345B6800DBFC11 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		515786081C345C1B00DBFC11 /* BitUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitUnit.swift; path = Sources/BitUnit.swift; sourceTree = "<group>"; };
+		5186C8401C3C12B9000331D8 /* BitUnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitUnitType.swift; path = Sources/BitUnitType.swift; sourceTree = "<group>"; };
 		51A0AFEB1C3AF76800984823 /* XCTestCaseProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +80,7 @@
 		515785EF1C34593300DBFC11 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5186C8401C3C12B9000331D8 /* BitUnitType.swift */,
 				515786081C345C1B00DBFC11 /* BitUnit.swift */,
 				515785F31C3459CB00DBFC11 /* main.swift */,
 			);
@@ -183,6 +187,7 @@
 			files = (
 				5157860A1C345C1B00DBFC11 /* BitUnit.swift in Sources */,
 				515785F41C3459CB00DBFC11 /* main.swift in Sources */,
+				5186C8411C3C12B9000331D8 /* BitUnitType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5186C8421C3C131A000331D8 /* BitUnitType.swift in Sources */,
 				5156696D1C35AAD60023D243 /* BitUnit.swift in Sources */,
 				51A0AFEC1C3AF76800984823 /* XCTestCaseProvider.swift in Sources */,
 				515785FD1C345A4400DBFC11 /* Tests.swift in Sources */,
