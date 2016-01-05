@@ -85,6 +85,8 @@ class Tests: XCTestCase, XCTestCaseProvider {
             XCTAssertEqual(i * 1000000, BitUnit.convert(i, from: .Petabit, to: .Gigabit))
             XCTAssertEqual(i * 1000, BitUnit.convert(i, from: .Petabit, to: .Terabit))
         }
+        
+        XCTAssertNil(BitUnit.convert(-1, from: .Petabit, to: .Terabit))
     }
     
     func testBinaryConversions() {
@@ -125,6 +127,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
             XCTAssertEqual(i * 1048576, BitUnit.convert(i, from: .Pebibyte, to: .Gibibyte))
             XCTAssertEqual(i * 1024, BitUnit.convert(i, from: .Pebibyte, to: .Tebibyte))
         }
+        XCTAssertNil(BitUnit.convert(-1, from: .Pebibyte, to: .Tebibyte))
     }
     
     func testStringFormatting() {
@@ -178,6 +181,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
         
         XCTAssertEqual("2.9 Mib", BitUnit.format(3, sourceUnit: .Megabit, targetUnitType: .BinaryBitUnit, formatter: formatter))
         
+        XCTAssertNil(BitUnit.format(-1, sourceUnit: .Megabit, targetUnitType: .BinaryBitUnit, formatter: formatter))
     }
     
     func testAbbreviations() {
