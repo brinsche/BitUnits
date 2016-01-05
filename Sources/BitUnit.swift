@@ -97,34 +97,42 @@ enum BitUnit: UInt {
         return convert(UInt(count), from: from, to: to)
     }
     
-    static func format(var count: UInt, var unit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
-        if unit.unitType != targetUnitType {
-            if targetUnitType == .BinaryByteUnit || targetUnitType == .DecimalByteUnit {
-                count = convert(count, from: unit, to: .Byte)
-                unit = .Byte
-            } else {
-                count = convert(count, from: unit, to: .Bit)
-                unit = .Bit
-            }
-        }
+    static func format(count: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
+        let gcUnit = greatestCommonUnit(sourceUnit, targetUnitType)
+        var unitArray = targetUnitType.units
+        let unitIndex = unitArray.indexOf(gcUnit)!
+
+        //remove all the units we don't need
+        unitArray.removeFirst(unitIndex)
         
-        let unitArray = targetUnitType.units
-        
-        var unitIndex = unitArray.indexOf(unit)!
-        var remainder = Double(count)
-        
-        while remainder >= targetUnitType.stepSize && unitIndex < unitArray.count - 1 {
+        var remainder = Double(convert(count, from: sourceUnit, to: gcUnit))
+        var generator = unitArray.generate()
+        var unit = generator.next()
+        while unit != nil && remainder >= targetUnitType.stepSize {
             remainder /= targetUnitType.stepSize
-            unitIndex += 1
+            unit = generator.next()
         }
-        return "\(formatter.stringFromNumber(remainder)!) \(unitArray[unitIndex].abbreviation)"
+        
+        return "\(formatter.stringFromNumber(remainder)!) \(unit!.abbreviation)"
     }
     
-    static func format(count: Int, unit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
+    static func format(count: Int, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
         guard count >= 0 else {
             return nil
         }
-        return format(UInt(count), unit: unit, targetUnitType: targetUnitType, formatter: formatter)
+        return format(UInt(count), sourceUnit: sourceUnit, targetUnitType: targetUnitType, formatter: formatter)
+    }
+    
+    private static func greatestCommonUnit(sourceUnit: BitUnit, _ targetUnitType: BitUnitType) -> BitUnit {
+        if sourceUnit.unitType == targetUnitType {
+            return sourceUnit
+        } else {
+            if targetUnitType == .BinaryByteUnit || targetUnitType == .DecimalByteUnit {
+                return .Byte
+            } else {
+                return .Bit
+            }
+        }
     }
     
 }
