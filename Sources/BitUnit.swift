@@ -104,21 +104,17 @@ extension BitUnit {
     
     static func format(count: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
         let gcUnit = greatestCommonUnit(sourceUnit, targetUnitType)
-        var unitArray = targetUnitType.units
-        let unitIndex = unitArray.indexOf(gcUnit)!
-
-        //remove all the units we don't need
-        unitArray.removeFirst(unitIndex)
+        let unitArray = targetUnitType.units
+        var unitIndex = unitArray.indexOf(gcUnit)!
         
         var remainder = Double(convert(count, from: sourceUnit, to: gcUnit))
-        var generator = unitArray.generate()
-        var unit = generator.next()
-        while unit != nil && remainder >= targetUnitType.stepSize {
+        
+        while remainder >= targetUnitType.stepSize && unitIndex < unitArray.count - 1 {
             remainder /= targetUnitType.stepSize
-            unit = generator.next()
+            unitIndex += 1
         }
         
-        return "\(formatter.stringFromNumber(remainder)!) \(unit!.abbreviation)"
+        return "\(formatter.stringFromNumber(remainder)!) \(unitArray[unitIndex].abbreviation)"
     }
     
     static func format(count: Int, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
