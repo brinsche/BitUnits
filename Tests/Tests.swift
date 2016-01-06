@@ -42,7 +42,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
     }
     
     func testBitConversions() {
-        for i: UInt in 0...999 {
+        for i: UInt64 in 0...999 {
             XCTAssertEqual(i / 8, BitUnit.convert(i, from: .Bit, to: .Byte))
             XCTAssertEqual(i / 1000, BitUnit.convert(i, from: .Bit, to: .Kilobit))
             XCTAssertEqual(i / 1000000, BitUnit.convert(i, from: .Bit, to: .Megabit))
@@ -90,7 +90,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
     }
     
     func testBinaryConversions() {
-        for i: UInt in 0...999 {
+        for i: UInt64 in 0...999 {
             XCTAssertEqual(i / 1024, BitUnit.convert(i, from: .Byte, to: .Kibibyte))
             XCTAssertEqual(i / 1048576, BitUnit.convert(i, from: .Byte, to: .Mebibyte))
             XCTAssertEqual(i / 1073741824, BitUnit.convert(i, from: .Byte, to: .Gibibyte))
@@ -144,7 +144,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
         XCTAssertEqual("16 kb", BitUnit.format(16_000, formatter: formatter))
         XCTAssertEqual("1.2 Mb", BitUnit.format(1_177_171, formatter: formatter))
         XCTAssertEqual("1.2 Gb", BitUnit.format(1_200_000_000, formatter: formatter))
-        XCTAssertEqual("4.3 Gb", BitUnit.format(UInt(UInt32.max), formatter: formatter))
+        XCTAssertEqual("18446.7 Pb", BitUnit.format(UInt64.max, formatter: formatter))
         XCTAssertEqual("3 Mb", BitUnit.format(3000, sourceUnit: .Kilobit, formatter: formatter))
         
         XCTAssertEqual("0 b", BitUnit.format(0, targetUnitType: .BinaryBitUnit, formatter: formatter))
@@ -154,7 +154,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
         XCTAssertEqual("16 Kib", BitUnit.format(16_384, targetUnitType: .BinaryBitUnit, formatter: formatter))
         XCTAssertEqual("1.2 Mib", BitUnit.format(1_258_290, targetUnitType: .BinaryBitUnit, formatter: formatter))
         XCTAssertEqual("1.2 Gib", BitUnit.format(1_288_488_960, targetUnitType: .BinaryBitUnit, formatter: formatter))
-        XCTAssertEqual("4 Gib", BitUnit.format(UInt(UInt32.max), targetUnitType: .BinaryBitUnit, formatter: formatter))
+        XCTAssertEqual("16384 Pib", BitUnit.format(UInt64.max, targetUnitType: .BinaryBitUnit, formatter: formatter))
         XCTAssertEqual("3 Mib", BitUnit.format(3072, sourceUnit: .Kibibit, targetUnitType: .BinaryBitUnit, formatter: formatter))
         
         XCTAssertEqual("0 B", BitUnit.format(0, targetUnitType: .DecimalByteUnit, formatter: formatter))
@@ -165,7 +165,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
         XCTAssertEqual("16 kB", BitUnit.format(128_000, targetUnitType: .DecimalByteUnit, formatter: formatter))
         XCTAssertEqual("1.2 MB", BitUnit.format(9_417_368, targetUnitType: .DecimalByteUnit, formatter: formatter))
         XCTAssertEqual("1.2 GB", BitUnit.format(9_600_000_000, targetUnitType: .DecimalByteUnit, formatter: formatter))
-        XCTAssertEqual("536.9 MB", BitUnit.format(UInt(UInt32.max), targetUnitType: .DecimalByteUnit, formatter: formatter))
+        XCTAssertEqual("2305.8 PB", BitUnit.format(UInt64.max, targetUnitType: .DecimalByteUnit, formatter: formatter))
         XCTAssertEqual("3 MB", BitUnit.format(24_000, sourceUnit: .Kilobit, targetUnitType: .DecimalByteUnit, formatter: formatter))
         
         XCTAssertEqual("0 B", BitUnit.format(0, targetUnitType: .BinaryByteUnit, formatter: formatter))
@@ -176,7 +176,7 @@ class Tests: XCTestCase, XCTestCaseProvider {
         XCTAssertEqual("16 KiB", BitUnit.format(131_072, targetUnitType: .BinaryByteUnit, formatter: formatter))
         XCTAssertEqual("1.2 MiB", BitUnit.format(10_066_320, targetUnitType: .BinaryByteUnit, formatter: formatter))
         XCTAssertEqual("1.2 GiB", BitUnit.format(10_307_911_680, targetUnitType: .BinaryByteUnit, formatter: formatter))
-        XCTAssertEqual("512 MiB", BitUnit.format(UInt(UInt32.max), targetUnitType: .BinaryByteUnit, formatter: formatter))
+        XCTAssertEqual("2048 PiB", BitUnit.format(UInt64.max, targetUnitType: .BinaryByteUnit, formatter: formatter))
         XCTAssertEqual("3 MiB", BitUnit.format(24_576, sourceUnit: .Kibibit, targetUnitType: .BinaryByteUnit, formatter: formatter))
         
         XCTAssertEqual("2.9 Mib", BitUnit.format(3, sourceUnit: .Megabit, targetUnitType: .BinaryBitUnit, formatter: formatter))
