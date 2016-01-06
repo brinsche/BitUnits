@@ -66,10 +66,7 @@ enum BitUnit: UInt64 {
         return convert(UInt64(count), from: from, to: to)
     }
     
-    static func convert(count: UInt, from: BitUnit, to: BitUnit) -> UInt64? {
-        guard count >= 0 else {
-            return nil
-        }
+    static func convert(count: UInt, from: BitUnit, to: BitUnit) -> UInt64 {
         return convert(UInt64(count), from: from, to: to)
     }
     
@@ -131,10 +128,7 @@ extension BitUnit {
         return format(UInt64(count), sourceUnit: sourceUnit, targetUnitType: targetUnitType, formatter: formatter)
     }
     
-    static func format(count: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
-        guard count >= 0 else {
-            return nil
-        }
+    static func format(count: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
         return format(UInt64(count), sourceUnit: sourceUnit, targetUnitType: targetUnitType, formatter: formatter)
     }
     
@@ -151,4 +145,3 @@ extension BitUnit {
     }
 
 }
-
