@@ -40,13 +40,6 @@ enum BitUnit: UInt64 {
         }
     }
     
-    private static var defaultFormatter: NSNumberFormatter {
-        let formatter = NSNumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }
-    
     static func convert(count: UInt64, from: BitUnit, to: BitUnit) -> UInt64 {
         if from.rawValue < to.rawValue {
             return count / (to.rawValue / from.rawValue)
@@ -142,6 +135,13 @@ extension BitUnit {
                 return .Bit
             }
         }
+    }
+    
+    private static var defaultFormatter: NSNumberFormatter {
+        let formatter = NSNumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
     }
 
 }
