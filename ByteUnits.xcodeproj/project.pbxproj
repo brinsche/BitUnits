@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5156696D1C35AAD60023D243 /* BitUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515786081C345C1B00DBFC11 /* BitUnit.swift */; };
-		515785F41C3459CB00DBFC11 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515785F31C3459CB00DBFC11 /* main.swift */; };
 		515785FD1C345A4400DBFC11 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515785FC1C345A4400DBFC11 /* Tests.swift */; };
 		5157860A1C345C1B00DBFC11 /* BitUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515786081C345C1B00DBFC11 /* BitUnit.swift */; };
 		5186C8411C3C12B9000331D8 /* BitUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186C8401C3C12B9000331D8 /* BitUnitType.swift */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		515785E51C3458FE00DBFC11 /* ByteUnits */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ByteUnits; sourceTree = BUILT_PRODUCTS_DIR; };
-		515785F31C3459CB00DBFC11 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = Sources/main.swift; sourceTree = "<group>"; };
 		515785FA1C345A4400DBFC11 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		515785FC1C345A4400DBFC11 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		515785FE1C345A4400DBFC11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 			children = (
 				5186C8401C3C12B9000331D8 /* BitUnitType.swift */,
 				515786081C345C1B00DBFC11 /* BitUnit.swift */,
-				515785F31C3459CB00DBFC11 /* main.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -186,7 +183,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5157860A1C345C1B00DBFC11 /* BitUnit.swift in Sources */,
-				515785F41C3459CB00DBFC11 /* main.swift in Sources */,
 				5186C8411C3C12B9000331D8 /* BitUnitType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

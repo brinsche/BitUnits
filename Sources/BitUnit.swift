@@ -1,7 +1,7 @@
 import Foundation
 
 /// Utility to convert and format units of information
-enum BitUnit: UInt64 {
+public enum BitUnit: UInt64 {
     
     /// Bit unit representing one bit.
     case Bit  = 1
@@ -52,7 +52,7 @@ enum BitUnit: UInt64 {
     case Pebibyte = 9007199254740992
     
     ///  - returns: the BitUnitType of the BitUnit
-    var type: BitUnitType {
+    public var type: BitUnitType {
         switch self {
         case .Bit, .Kilobit, .Megabit, .Gigabit, .Terabit, .Petabit:
             return .DecimalBitUnit
@@ -73,7 +73,7 @@ enum BitUnit: UInt64 {
     /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: The converted amount.
-    static func convert(amount: UInt64, from: BitUnit, to: BitUnit) -> UInt64 {
+    public static func convert(amount: UInt64, from: BitUnit, to: BitUnit) -> UInt64 {
         if from.rawValue < to.rawValue {
             return amount / (to.rawValue / from.rawValue)
         }
@@ -90,7 +90,7 @@ enum BitUnit: UInt64 {
     /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: An optional of the converted amount, only nil if amount < 0.
-    static func convert(amount: Int, from: BitUnit, to: BitUnit) -> UInt64? {
+    public static func convert(amount: Int, from: BitUnit, to: BitUnit) -> UInt64? {
         guard amount >= 0 else {
             return nil
         }
@@ -103,7 +103,7 @@ enum BitUnit: UInt64 {
     /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: The converted amount.
-    static func convert(amount: UInt, from: BitUnit, to: BitUnit) -> UInt64 {
+    public static func convert(amount: UInt, from: BitUnit, to: BitUnit) -> UInt64 {
         return convert(UInt64(amount), from: from, to: to)
     }
     
@@ -114,7 +114,7 @@ enum BitUnit: UInt64 {
 extension BitUnit {
     
     ///  - returns: the abbreviation of the BitUnit
-    var abbreviation: String {
+    public var abbreviation: String {
         switch (self) {
         case Bit:     return "b"
         case Kilobit: return "kb"
@@ -151,7 +151,7 @@ extension BitUnit {
     /// - parameter targetUnitType: The targetUnitType, i.e. whether you want Mb, Mib, MB or MiB, default is Mb.
     /// - parameter formatter: Pass a custom NSNumberFormatter for additional formatting, default is 0-2 fraction digits.
     /// - returns: The formatted String
-    static func format(amount: UInt64, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
+    public static func format(amount: UInt64, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
         let gcUnit = greatestCommonUnit(sourceUnit, targetUnitType)
         let unitArray = targetUnitType.units
         var unitIndex = unitArray.indexOf(gcUnit)!
@@ -173,7 +173,7 @@ extension BitUnit {
     /// - parameter targetUnitType: The targetUnitType, i.e. whether you want Mb, Mib, MB or MiB, default is Mb.
     /// - parameter formatter: Pass a custom NSNumberFormatter for additional formatting, default is 0-2 fraction digits.
     /// - returns: The formatted String
-    static func format(amount: Int, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
+    public static func format(amount: Int, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
         guard amount >= 0 else {
             return nil
         }
@@ -187,7 +187,7 @@ extension BitUnit {
     /// - parameter targetUnitType: The targetUnitType, i.e. whether you want Mb, Mib, MB or MiB, default is Mb.
     /// - parameter formatter: Pass a custom NSNumberFormatter for additional formatting, default is 0-2 fraction digits.
     /// - returns: The formatted String
-    static func format(amount: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
+    public static func format(amount: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
         return format(UInt64(amount), sourceUnit: sourceUnit, targetUnitType: targetUnitType, formatter: formatter)
     }
     

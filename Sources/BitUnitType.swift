@@ -1,5 +1,5 @@
 /// Enumeration to differentiate between bit units ending in bit and byte
-enum BitUnitType {
+public enum BitUnitType {
     case DecimalBitUnit, DecimalByteUnit
     case BinaryBitUnit, BinaryByteUnit
     
@@ -14,7 +14,7 @@ enum BitUnitType {
     }
     
     ///  - returns: an array of the BitUnits belonging to the BitUnitType
-    var units: [BitUnit] {
+    public var units: [BitUnit] {
         switch self {
         case .DecimalBitUnit:
             return [.Bit,  .Kilobit,  .Megabit,  .Gigabit,  .Terabit,  .Petabit]
