@@ -1,7 +1,9 @@
+/// Enumeration to differentiate between bit units ending in bit and byte
 enum BitUnitType {
     case DecimalBitUnit, DecimalByteUnit
     case BinaryBitUnit, BinaryByteUnit
     
+    /// - returns: the factor between units of the BitUnitType
     var stepSize: Double {
         switch self {
         case .DecimalBitUnit, .DecimalByteUnit:
@@ -11,6 +13,7 @@ enum BitUnitType {
         }
     }
     
+    ///  - returns: an array of the BitUnits belonging to the BitUnitType
     var units: [BitUnit] {
         switch self {
         case .DecimalBitUnit:
