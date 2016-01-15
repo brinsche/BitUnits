@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ByteUnits.xcodeproj">
+      location = "self:/Users/memorion/Projects/ByteUnits/BitUnits.xcodeproj">
    </FileRef>
 </Workspace>

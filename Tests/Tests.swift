@@ -1,5 +1,5 @@
 import XCTest
-@testable import ByteUnits
+@testable import BitUnits
 
 class Tests: XCTestCase, XCTestCaseProvider {
     var allTests : [(String, () -> Void)] {

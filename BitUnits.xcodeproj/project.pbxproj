@@ -10,6 +10,7 @@
 		5156696D1C35AAD60023D243 /* BitUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515786081C345C1B00DBFC11 /* BitUnit.swift */; };
 		515785FD1C345A4400DBFC11 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515785FC1C345A4400DBFC11 /* Tests.swift */; };
 		5157860A1C345C1B00DBFC11 /* BitUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515786081C345C1B00DBFC11 /* BitUnit.swift */; };
+		517C8FBE1C49536B0066D7AB /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515785FC1C345A4400DBFC11 /* Tests.swift */; };
 		5186C8411C3C12B9000331D8 /* BitUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186C8401C3C12B9000331D8 /* BitUnitType.swift */; };
 		5186C8421C3C131A000331D8 /* BitUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186C8401C3C12B9000331D8 /* BitUnitType.swift */; };
 		51A0AFEC1C3AF76800984823 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A0AFEB1C3AF76800984823 /* XCTestCaseProvider.swift */; };
@@ -28,7 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		515785E51C3458FE00DBFC11 /* ByteUnits */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ByteUnits; sourceTree = BUILT_PRODUCTS_DIR; };
+		515785E51C3458FE00DBFC11 /* BitUnits */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BitUnits; sourceTree = BUILT_PRODUCTS_DIR; };
 		515785FA1C345A4400DBFC11 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		515785FC1C345A4400DBFC11 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		515785FE1C345A4400DBFC11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +70,7 @@
 		515785E61C3458FE00DBFC11 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				515785E51C3458FE00DBFC11 /* ByteUnits */,
+				515785E51C3458FE00DBFC11 /* BitUnits */,
 				515785FA1C345A4400DBFC11 /* Tests.xctest */,
 			);
 			name = Products;
@@ -97,9 +98,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		515785E41C3458FE00DBFC11 /* ByteUnits */ = {
+		515785E41C3458FE00DBFC11 /* BitUnits */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 515785EC1C3458FE00DBFC11 /* Build configuration list for PBXNativeTarget "ByteUnits" */;
+			buildConfigurationList = 515785EC1C3458FE00DBFC11 /* Build configuration list for PBXNativeTarget "BitUnits" */;
 			buildPhases = (
 				515785E11C3458FE00DBFC11 /* Sources */,
 				515785E21C3458FE00DBFC11 /* Frameworks */,
@@ -109,9 +110,9 @@
 			);
 			dependencies = (
 			);
-			name = ByteUnits;
-			productName = ByteUnits;
-			productReference = 515785E51C3458FE00DBFC11 /* ByteUnits */;
+			name = BitUnits;
+			productName = BitUnits;
+			productReference = 515785E51C3458FE00DBFC11 /* BitUnits */;
 			productType = "com.apple.product-type.tool";
 		};
 		515785F91C345A4400DBFC11 /* Tests */ = {
@@ -149,7 +150,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 515785E01C3458FE00DBFC11 /* Build configuration list for PBXProject "ByteUnits" */;
+			buildConfigurationList = 515785E01C3458FE00DBFC11 /* Build configuration list for PBXProject "BitUnits" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -161,7 +162,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				515785E41C3458FE00DBFC11 /* ByteUnits */,
+				515785E41C3458FE00DBFC11 /* BitUnits */,
 				515785F91C345A4400DBFC11 /* Tests */,
 			);
 		};
@@ -183,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5157860A1C345C1B00DBFC11 /* BitUnit.swift in Sources */,
+				517C8FBE1C49536B0066D7AB /* Tests.swift in Sources */,
 				5186C8411C3C12B9000331D8 /* BitUnitType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +288,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BitUnits;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -296,7 +298,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BitUnits;
 			};
 			name = Release;
 		};
@@ -325,7 +327,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		515785E01C3458FE00DBFC11 /* Build configuration list for PBXProject "ByteUnits" */ = {
+		515785E01C3458FE00DBFC11 /* Build configuration list for PBXProject "BitUnits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				515785EA1C3458FE00DBFC11 /* Debug */,
@@ -334,7 +336,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		515785EC1C3458FE00DBFC11 /* Build configuration list for PBXNativeTarget "ByteUnits" */ = {
+		515785EC1C3458FE00DBFC11 /* Build configuration list for PBXNativeTarget "BitUnits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				515785ED1C3458FE00DBFC11 /* Debug */,
