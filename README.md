@@ -1,4 +1,4 @@
-# BitUnits
+# BitUnits [![Build Status](https://travis-ci.org/Memorion/BitUnits.svg?branch=master)](https://travis-ci.org/Memorion/BitUnits)
 Utility library to convert and format SI and IEC bit and byte units.
 
 ## Samples
