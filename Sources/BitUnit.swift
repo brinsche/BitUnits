@@ -163,7 +163,7 @@ extension BitUnit {
             unitIndex += 1
         }
         
-        return "\(formatter.stringFromNumber(remainder)!) \(unitArray[unitIndex].abbreviation)"
+        return "\(formatter.stringFromNumber(NSNumber(double: remainder))!) \(unitArray[unitIndex].abbreviation)"
     }
     
     /// Converts the input to human readable output.
