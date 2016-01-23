@@ -7,8 +7,8 @@ Utility library to convert and format SI and IEC bit and byte units.
 //Ints return an optional, because we only support values >= 0.
 //In case you can guarantee this, it’s safe to force unwrap the return value
 
-let value = UInt(4)
-let x = BitUnit.convert(value, from: .Megabit, to: .Kilobit)
+let amount = UInt(4)
+let x = BitUnit.Megabit.convert(amount, to: .Kilobit)
 print(x)
 => 4000
 ````
@@ -46,5 +46,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-

@@ -70,15 +70,14 @@ public enum BitUnit: UInt64 {
     /// Converts between the different BitUnits
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
-    /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: The converted amount.
-    public static func convert(amount: UInt64, from: BitUnit, to: BitUnit) -> UInt64 {
-        if from.rawValue < to.rawValue {
-            return amount / (to.rawValue / from.rawValue)
+    public func convert(amount: UInt64, to: BitUnit) -> UInt64 {
+        if self.rawValue < to.rawValue {
+            return amount / (to.rawValue / self.rawValue)
         }
-        else if from.rawValue > to.rawValue {
-            return amount * (from.rawValue / to.rawValue)
+        else if self.rawValue > to.rawValue {
+            return amount * (self.rawValue / to.rawValue)
         } else {
             return amount
         }
@@ -87,24 +86,22 @@ public enum BitUnit: UInt64 {
     /// Converts between the different BitUnits
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
-    /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: An optional of the converted amount, only nil if amount < 0.
-    public static func convert(amount: Int, from: BitUnit, to: BitUnit) -> UInt64? {
+    public func convert(amount: Int, to: BitUnit) -> UInt64? {
         guard amount >= 0 else {
             return nil
         }
-        return convert(UInt64(amount), from: from, to: to)
+        return convert(UInt64(amount), to: to)
     }
     
     /// Converts between the different BitUnits
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
-    /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: The converted amount.
-    public static func convert(amount: UInt, from: BitUnit, to: BitUnit) -> UInt64 {
-        return convert(UInt64(amount), from: from, to: to)
+    public func convert(amount: UInt, to: BitUnit) -> UInt64 {
+        return convert(UInt64(amount), to: to)
     }
     
 }
@@ -156,7 +153,7 @@ extension BitUnit {
         let unitArray = targetUnitType.units
         var unitIndex = unitArray.indexOf(gcUnit)!
         
-        var remainder = Double(convert(amount, from: sourceUnit, to: gcUnit))
+        var remainder = Double(sourceUnit.convert(amount, to: gcUnit))
         
         while remainder >= targetUnitType.stepSize && unitIndex < unitArray.count - 1 {
             remainder /= targetUnitType.stepSize
