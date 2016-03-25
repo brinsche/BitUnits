@@ -3,7 +3,7 @@
 #Forked from https://github.com/jatoben/CommandLine
 
 set -ev
-SWIFT_SNAPSHOT="swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a"
+SWIFT_SNAPSHOT="swift-DEVELOPMENT-SNAPSHOT-2016-03-24-a"
 
 echo "Installing ${SWIFT_SNAPSHOT}..."
 curl -s -L -O "https://swift.org/builds/development/ubuntu1404/${SWIFT_SNAPSHOT}/${SWIFT_SNAPSHOT}-ubuntu14.04.tar.gz"

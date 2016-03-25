@@ -154,7 +154,7 @@ extension BitUnit {
     public static func format(amount: UInt64, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
         let gcUnit = greatestCommonUnit(sourceUnit, targetUnitType)
         let unitArray = targetUnitType.units
-        var unitIndex = unitArray.indexOf(gcUnit)!
+        var unitIndex = unitArray.index(of: gcUnit)!
         
         var remainder = Double(convert(amount, from: sourceUnit, to: gcUnit))
         
@@ -163,7 +163,7 @@ extension BitUnit {
             unitIndex += 1
         }
         
-        return "\(formatter.stringFromNumber(NSNumber(double: remainder))!) \(unitArray[unitIndex].abbreviation)"
+        return "\(formatter.string(from: NSNumber(double: remainder))!) \(unitArray[unitIndex].abbreviation)"
     }
     
     /// Converts the input to human readable output.
