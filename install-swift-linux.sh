@@ -14,6 +14,6 @@ echo "Installing XCTest..."
 curl -s -L -O "https://github.com/apple/swift-corelibs-xctest/archive/${SWIFT_SNAPSHOT}.tar.gz"
 tar -zxvf "${SWIFT_SNAPSHOT}.tar.gz"
 cd "swift-corelibs-xctest-${SWIFT_SNAPSHOT}"
-./build_script.py --swiftc="/swift/usr/bin/swiftc" --build-dir="/tmp/XCTest_build" --swift-build-dir="/swift/usr" --arch="x86_64" --library-install-path="/swift/usr/lib/swift/linux" --module-install-path="/swift/usr/lib/swift/linux/x86_64"
+./build_script.py --swiftc="/swift/usr/bin/swiftc" --build-dir="/tmp/XCTest_build" --swift-build-dir="/swift/usr" --arch="x86_64" --foundation-build-dir "/swift/usr/lib/swift/linux" --library-install-path="/swift/usr/lib/swift/linux" --module-install-path="/swift/usr/lib/swift/linux/x86_64"
 cd ..
 rm -rf "swift-corelibs-xctest-${SWIFT_SNAPSHOT}"
