@@ -1,8 +1,9 @@
 import XCTest
+import Foundation
 @testable import BitUnits
 
-class Tests: XCTestCase, XCTestCaseProvider {
-    var allTests : [(String, () -> Void)] {
+class BitUnitsTests: XCTestCase {
+    static var allTests : [(String, (BitUnitsTests) -> () throws -> Void)] {
         return [
             ("testRawValues", testRawValues),
             ("testBitConversions", testBitConversions),
@@ -132,10 +133,10 @@ class Tests: XCTestCase, XCTestCaseProvider {
     
     func testStringFormatting() {
         //TODO test all units
-        let formatter = NSNumberFormatter()
+        let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 1
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        formatter.locale = Locale(identifier: "en_US")
         
         XCTAssertEqual("0 b", BitUnit.format(0, formatter: formatter))
         XCTAssertEqual("1 b", BitUnit.format(1, formatter: formatter))

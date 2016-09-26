@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "9999"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "51AA1B7D1C513E8E00D27DE1"
+               BlueprintIdentifier = "______Target_BitUnits"
                BuildableName = "BitUnits.framework"
                BlueprintName = "BitUnits"
                ReferencedContainer = "container:BitUnits.xcodeproj">
@@ -32,22 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "51AA1B871C513E8E00D27DE1"
+               BlueprintIdentifier = "______Target_BitUnitsTests"
                BuildableName = "BitUnitsTests.xctest"
                BlueprintName = "BitUnitsTests"
                ReferencedContainer = "container:BitUnits.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "51AA1B7D1C513E8E00D27DE1"
-            BuildableName = "BitUnits.framework"
-            BlueprintName = "BitUnits"
-            ReferencedContainer = "container:BitUnits.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,7 +55,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "51AA1B7D1C513E8E00D27DE1"
+            BlueprintIdentifier = "______Target_BitUnits"
             BuildableName = "BitUnits.framework"
             BlueprintName = "BitUnits"
             ReferencedContainer = "container:BitUnits.xcodeproj">
@@ -79,15 +70,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "51AA1B7D1C513E8E00D27DE1"
-            BuildableName = "BitUnits.framework"
-            BlueprintName = "BitUnits"
-            ReferencedContainer = "container:BitUnits.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

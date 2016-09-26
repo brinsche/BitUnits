@@ -73,7 +73,7 @@ public enum BitUnit: UInt64 {
     /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: The converted amount.
-    public static func convert(amount: UInt64, from: BitUnit, to: BitUnit) -> UInt64 {
+    public static func convert(_ amount: UInt64, from: BitUnit, to: BitUnit) -> UInt64 {
         if from.rawValue < to.rawValue {
             return amount / (to.rawValue / from.rawValue)
         }
@@ -90,7 +90,7 @@ public enum BitUnit: UInt64 {
     /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: An optional of the converted amount, only nil if amount < 0.
-    public static func convert(amount: Int, from: BitUnit, to: BitUnit) -> UInt64? {
+    public static func convert(_ amount: Int, from: BitUnit, to: BitUnit) -> UInt64? {
         guard amount >= 0 else {
             return nil
         }
@@ -103,7 +103,7 @@ public enum BitUnit: UInt64 {
     /// - parameter from: The unit of the amount.
     /// - parameter to: The unit you want to convert the amount to.
     /// - returns: The converted amount.
-    public static func convert(amount: UInt, from: BitUnit, to: BitUnit) -> UInt64 {
+    public static func convert(_ amount: UInt, from: BitUnit, to: BitUnit) -> UInt64 {
         return convert(UInt64(amount), from: from, to: to)
     }
     
@@ -116,31 +116,31 @@ extension BitUnit {
     ///  - returns: the abbreviation of the BitUnit
     public var abbreviation: String {
         switch (self) {
-        case Bit:     return "b"
-        case Kilobit: return "kb"
-        case Megabit: return "Mb"
-        case Gigabit: return "Gb"
-        case Terabit: return "Tb"
-        case Petabit: return "Pb"
+        case .Bit:     return "b"
+        case .Kilobit: return "kb"
+        case .Megabit: return "Mb"
+        case .Gigabit: return "Gb"
+        case .Terabit: return "Tb"
+        case .Petabit: return "Pb"
             
-        case Byte:     return "B"
-        case Kilobyte: return "kB"
-        case Megabyte: return "MB"
-        case Gigabyte: return "GB"
-        case Terabyte: return "TB"
-        case Petabyte: return "PB"
+        case .Byte:     return "B"
+        case .Kilobyte: return "kB"
+        case .Megabyte: return "MB"
+        case .Gigabyte: return "GB"
+        case .Terabyte: return "TB"
+        case .Petabyte: return "PB"
             
-        case Kibibit: return "Kib"
-        case Mebibit: return "Mib"
-        case Gibibit: return "Gib"
-        case Tebibit: return "Tib"
-        case Pebibit: return "Pib"
+        case .Kibibit: return "Kib"
+        case .Mebibit: return "Mib"
+        case .Gibibit: return "Gib"
+        case .Tebibit: return "Tib"
+        case .Pebibit: return "Pib"
             
-        case Kibibyte: return "KiB"
-        case Mebibyte: return "MiB"
-        case Gibibyte: return "GiB"
-        case Tebibyte: return "TiB"
-        case Pebibyte: return "PiB"
+        case .Kibibyte: return "KiB"
+        case .Mebibyte: return "MiB"
+        case .Gibibyte: return "GiB"
+        case .Tebibyte: return "TiB"
+        case .Pebibyte: return "PiB"
         }
     }
     
@@ -151,10 +151,10 @@ extension BitUnit {
     /// - parameter targetUnitType: The targetUnitType, i.e. whether you want Mb, Mib, MB or MiB, default is Mb.
     /// - parameter formatter: Pass a custom NSNumberFormatter for additional formatting, default is 0-2 fraction digits.
     /// - returns: The formatted String
-    public static func format(amount: UInt64, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
+    public static func format(_ amount: UInt64, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NumberFormatter = defaultFormatter) -> String {
         let gcUnit = greatestCommonUnit(sourceUnit, targetUnitType)
         let unitArray = targetUnitType.units
-        var unitIndex = unitArray.indexOf(gcUnit)!
+        var unitIndex = unitArray.index(of: gcUnit)!
         
         var remainder = Double(convert(amount, from: sourceUnit, to: gcUnit))
         
@@ -163,7 +163,7 @@ extension BitUnit {
             unitIndex += 1
         }
         
-        return "\(formatter.stringFromNumber(NSNumber(double: remainder))!) \(unitArray[unitIndex].abbreviation)"
+        return "\(formatter.string(from: NSNumber(value: remainder))!) \(unitArray[unitIndex].abbreviation)"
     }
     
     /// Converts the input to human readable output.
@@ -173,7 +173,7 @@ extension BitUnit {
     /// - parameter targetUnitType: The targetUnitType, i.e. whether you want Mb, Mib, MB or MiB, default is Mb.
     /// - parameter formatter: Pass a custom NSNumberFormatter for additional formatting, default is 0-2 fraction digits.
     /// - returns: The formatted String
-    public static func format(amount: Int, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String? {
+    public static func format(_ amount: Int, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NumberFormatter = defaultFormatter) -> String? {
         guard amount >= 0 else {
             return nil
         }
@@ -187,12 +187,12 @@ extension BitUnit {
     /// - parameter targetUnitType: The targetUnitType, i.e. whether you want Mb, Mib, MB or MiB, default is Mb.
     /// - parameter formatter: Pass a custom NSNumberFormatter for additional formatting, default is 0-2 fraction digits.
     /// - returns: The formatted String
-    public static func format(amount: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NSNumberFormatter = defaultFormatter) -> String {
+    public static func format(_ amount: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NumberFormatter = defaultFormatter) -> String {
         return format(UInt64(amount), sourceUnit: sourceUnit, targetUnitType: targetUnitType, formatter: formatter)
     }
     
     /// :nodoc:
-    private static func greatestCommonUnit(sourceUnit: BitUnit, _ targetUnitType: BitUnitType) -> BitUnit {
+    private static func greatestCommonUnit(_ sourceUnit: BitUnit, _ targetUnitType: BitUnitType) -> BitUnit {
         if sourceUnit.type == targetUnitType {
             return sourceUnit
         } else {
@@ -205,8 +205,8 @@ extension BitUnit {
     }
     
     /// :nodoc:
-    private static var defaultFormatter: NSNumberFormatter {
-        let formatter = NSNumberFormatter()
+    private static var defaultFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 2
         return formatter
