@@ -7,14 +7,14 @@ matrix:
     xcode_project: BitUnits.xcodeproj
     xcode_scheme: BitUnits
     script: xcodebuild -scheme BitUnits test
-    osx_image: xcode8
+    osx_image: xcode8.2
   - os: linux
     sudo: required
     dist: trusty
     before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq clang libicu-dev
-    - export SWIFT_VERSION="swift-3.0"
+    - export SWIFT_VERSION="swift-3.0.2"
     - echo "Installing ${SWIFT_VERSION}..."
     - curl -s -L -O "https://swift.org/builds/${SWIFT_VERSION}-release/ubuntu1404/${SWIFT_VERSION}-RELEASE/${SWIFT_VERSION}-RELEASE-ubuntu14.04.tar.gz"
     - tar -zxvf "${SWIFT_VERSION}-RELEASE-ubuntu14.04.tar.gz"
