@@ -14,7 +14,7 @@ matrix:
     before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq clang libicu-dev
-    - export SWIFT_VERSION="swift-3.1"
+    - export SWIFT_VERSION="swift-3.1.1"
     - echo "Installing ${SWIFT_VERSION}..."
     - curl -s -L -O "https://swift.org/builds/${SWIFT_VERSION}-release/ubuntu1404/${SWIFT_VERSION}-RELEASE/${SWIFT_VERSION}-RELEASE-ubuntu14.04.tar.gz"
     - tar -zxvf "${SWIFT_VERSION}-RELEASE-ubuntu14.04.tar.gz"
