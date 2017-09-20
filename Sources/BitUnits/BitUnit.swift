@@ -205,7 +205,7 @@ extension BitUnit {
     }
     
     /// :nodoc:
-    private static var defaultFormatter: NumberFormatter {
+    public static var defaultFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 2

@@ -3,16 +3,14 @@ import Foundation
 @testable import BitUnits
 
 class BitUnitsTests: XCTestCase {
-    static var allTests : [(String, (BitUnitsTests) -> () throws -> Void)] {
-        return [
-            ("testRawValues", testRawValues),
-            ("testBitConversions", testBitConversions),
-            ("testBinaryConversions", testBinaryConversions),
-            ("testStringFormatting", testStringFormatting),
-            ("testAbbreviations", testAbbreviations)
-            // Other tests go here
-        ]
-    }
+    static var allTests = [
+        ("testRawValues", testRawValues),
+        ("testBitConversions", testBitConversions),
+        ("testBinaryConversions", testBinaryConversions),
+        ("testStringFormatting", testStringFormatting),
+        ("testAbbreviations", testAbbreviations)
+        // Other tests go here
+    ]
     
     func testRawValues() {
         XCTAssertEqual(1, BitUnit.Bit.rawValue)

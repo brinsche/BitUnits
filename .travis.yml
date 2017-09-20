@@ -7,14 +7,14 @@ matrix:
     xcode_project: BitUnits.xcodeproj
     xcode_scheme: BitUnits
     script: xcodebuild -scheme BitUnits test
-    osx_image: xcode8.3
+    osx_image: xcode9
   - os: linux
     sudo: required
     dist: trusty
     before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq clang libicu-dev
-    - export SWIFT_VERSION="swift-3.1.1"
+    - export SWIFT_VERSION="swift-4.0"
     - echo "Installing ${SWIFT_VERSION}..."
     - curl -s -L -O "https://swift.org/builds/${SWIFT_VERSION}-release/ubuntu1404/${SWIFT_VERSION}-RELEASE/${SWIFT_VERSION}-RELEASE-ubuntu14.04.tar.gz"
     - tar -zxvf "${SWIFT_VERSION}-RELEASE-ubuntu14.04.tar.gz"
@@ -23,6 +23,3 @@ matrix:
     script:
     - swift build --verbose
     - swift test --verbose
-notifications:
-  slack:
-    secure: ibfxxRBm5oklCoglwN/oEs0oHi8j/2S3lTzxiiYQmfmlza9gdji5bxhi+g26h+Q8EN3glqfYvCiex4hG7U8cmet2CmWW3lqtSvTCGJuLIRx4rlShndH1eqly/VesOFoSfOMz+gKPU/jp+hEsh7FlV7g+4LlZN31DMnamj7bX93nEacjrE08NjN1o2p5UXfiwC8uxtZMO/VcfsraSExSI7Cl/eI0G+jb8jG8jRz5NXtQzSEJYHcERwxlXEdnLmbcEwULP3YoYESzuet4zdUw5+DoOfJcSBSsblyw2hbPbZo6Ni/6epbzRjwRau2Yk6rOR1TiTS/tVHCCmX8lypr7DFIezC3uACbWYE12bDgOlV0Mxn4i1CfYCTU4yeF8mxIQ56vi4tnFE/Emf+YeaSRAMxHd+T0JFPdID6KIShOBuzsuNr+xX4oepA3e/9XGa6Dm2sLqkCxY6j3S/Wqhz5pLwaX/cy+UljIkVemFq0bDDGw+SYTLXkidwUO+6KMG/mzBnkKxNTi07VDGa3NmpMq5aoBEfVgqc/cWEFWOAuHCv4MbswHi9fPJIo0AvJsrjEpUONShr6jxziTPEN4ZbPTLZTFDCG1PV1yV4xwreR2uS1ygy2vZo4QBebO7+XblHpbUmSh+clpI+TB19IoGNqA/c5zXs1WVGzUt1wFNTiujV9Lc=
