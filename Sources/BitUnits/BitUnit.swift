@@ -2,55 +2,54 @@ import Foundation
 
 /// Utility to convert and format units of information
 public enum BitUnit: UInt64 {
-    
     /// Bit unit representing one bit.
-    case Bit  = 1
+    case Bit = 1
     /// A bit unit representing 1000 bits.
     case Kilobit = 1000
     /// A bit unit representing 1000 kilobits.
-    case Megabit = 1000000
+    case Megabit = 1_000_000
     /// A bit unit representing 1000 megabits.
-    case Gigabit = 1000000000
+    case Gigabit = 1_000_000_000
     /// A bit unit representing 1000 gigabits.
-    case Terabit = 1000000000000
+    case Terabit = 1_000_000_000_000
     /// A bit unit representing 1000 terabits.
-    case Petabit = 1000000000000000
-    
+    case Petabit = 1_000_000_000_000_000
+
     /// Bit unit representing one byte.
-    case Byte  = 8
+    case Byte = 8
     /// A bit unit representing 1000 bytes.
     case Kilobyte = 8000
     /// A bit unit representing 1000 kilobytes.
-    case Megabyte = 8000000
+    case Megabyte = 8_000_000
     /// A bit unit representing 1000 megabytes.
-    case Gigabyte = 8000000000
+    case Gigabyte = 8_000_000_000
     /// A bit unit representing 1000 gigabytes.
-    case Terabyte = 8000000000000
+    case Terabyte = 8_000_000_000_000
     /// A bit unit representing 1000 terabytes.
-    case Petabyte = 8000000000000000
-    
+    case Petabyte = 8_000_000_000_000_000
+
     /// A bit unit representing 1024 bits.
     case Kibibit = 1024
     /// A bit unit representing 1024 kibibits.
-    case Mebibit = 1048576
+    case Mebibit = 1_048_576
     /// A bit unit representing 1024 mebibits.
-    case Gibibit = 1073741824
+    case Gibibit = 1_073_741_824
     /// A bit unit representing 1024 gibibits.
-    case Tebibit = 1099511627776
+    case Tebibit = 1_099_511_627_776
     /// A bit unit representing 1024 tebibits.
-    case Pebibit = 1125899906842624
-    
+    case Pebibit = 1_125_899_906_842_624
+
     /// A bit unit representing 1024 bytes.
     case Kibibyte = 8192
     /// A bit unit representing 1024 kibibytes.
-    case Mebibyte = 8388608
+    case Mebibyte = 8_388_608
     /// A bit unit representing 1024 mebibytes.
-    case Gibibyte = 8589934592
+    case Gibibyte = 8_589_934_592
     /// A bit unit representing 1024 gibibytes.
-    case Tebibyte = 8796093022208
+    case Tebibyte = 8_796_093_022_208
     /// A bit unit representing 1024 tebibytes.
-    case Pebibyte = 9007199254740992
-    
+    case Pebibyte = 9_007_199_254_740_992
+
     ///  - returns: the BitUnitType of the BitUnit
     public var type: BitUnitType {
         switch self {
@@ -64,9 +63,7 @@ public enum BitUnit: UInt64 {
             return .BinaryByteUnit
         }
     }
-    
-    
-    
+
     /// Converts between the different BitUnits
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
@@ -76,14 +73,13 @@ public enum BitUnit: UInt64 {
     public static func convert(_ amount: UInt64, from: BitUnit, to: BitUnit) -> UInt64 {
         if from.rawValue < to.rawValue {
             return amount / (to.rawValue / from.rawValue)
-        }
-        else if from.rawValue > to.rawValue {
+        } else if from.rawValue > to.rawValue {
             return amount * (from.rawValue / to.rawValue)
         } else {
             return amount
         }
     }
-    
+
     /// Converts between the different BitUnits
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
@@ -96,7 +92,7 @@ public enum BitUnit: UInt64 {
         }
         return convert(UInt64(amount), from: from, to: to)
     }
-    
+
     /// Converts between the different BitUnits
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
@@ -106,36 +102,34 @@ public enum BitUnit: UInt64 {
     public static func convert(_ amount: UInt, from: BitUnit, to: BitUnit) -> UInt64 {
         return convert(UInt64(amount), from: from, to: to)
     }
-    
 }
 
-//MARK: - Formatting
+// MARK: - Formatting
 
 extension BitUnit {
-    
     ///  - returns: the abbreviation of the BitUnit
     public var abbreviation: String {
-        switch (self) {
-        case .Bit:     return "b"
+        switch self {
+        case .Bit: return "b"
         case .Kilobit: return "kb"
         case .Megabit: return "Mb"
         case .Gigabit: return "Gb"
         case .Terabit: return "Tb"
         case .Petabit: return "Pb"
-            
-        case .Byte:     return "B"
+
+        case .Byte: return "B"
         case .Kilobyte: return "kB"
         case .Megabyte: return "MB"
         case .Gigabyte: return "GB"
         case .Terabyte: return "TB"
         case .Petabyte: return "PB"
-            
+
         case .Kibibit: return "Kib"
         case .Mebibit: return "Mib"
         case .Gibibit: return "Gib"
         case .Tebibit: return "Tib"
         case .Pebibit: return "Pib"
-            
+
         case .Kibibyte: return "KiB"
         case .Mebibyte: return "MiB"
         case .Gibibyte: return "GiB"
@@ -143,7 +137,7 @@ extension BitUnit {
         case .Pebibyte: return "PiB"
         }
     }
-    
+
     /// Converts the input to human readable output.
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
@@ -155,17 +149,17 @@ extension BitUnit {
         let gcUnit = greatestCommonUnit(sourceUnit, targetUnitType)
         let unitArray = targetUnitType.units
         var unitIndex = unitArray.index(of: gcUnit)!
-        
+
         var remainder = Double(convert(amount, from: sourceUnit, to: gcUnit))
-        
+
         while remainder >= targetUnitType.stepSize && unitIndex < unitArray.count - 1 {
             remainder /= targetUnitType.stepSize
             unitIndex += 1
         }
-        
+
         return "\(formatter.string(from: NSNumber(value: remainder))!) \(unitArray[unitIndex].abbreviation)"
     }
-    
+
     /// Converts the input to human readable output.
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
@@ -179,7 +173,7 @@ extension BitUnit {
         }
         return format(UInt64(amount), sourceUnit: sourceUnit, targetUnitType: targetUnitType, formatter: formatter)
     }
-    
+
     /// Converts the input to human readable output.
     ///
     /// - parameter amount: The amount of the sourceUnit to be formatted.
@@ -190,7 +184,7 @@ extension BitUnit {
     public static func format(_ amount: UInt, sourceUnit: BitUnit = .Bit, targetUnitType: BitUnitType = .DecimalBitUnit, formatter: NumberFormatter = defaultFormatter) -> String {
         return format(UInt64(amount), sourceUnit: sourceUnit, targetUnitType: targetUnitType, formatter: formatter)
     }
-    
+
     /// :nodoc:
     private static func greatestCommonUnit(_ sourceUnit: BitUnit, _ targetUnitType: BitUnitType) -> BitUnit {
         if sourceUnit.type == targetUnitType {
@@ -203,7 +197,7 @@ extension BitUnit {
             }
         }
     }
-    
+
     /// :nodoc:
     public static var defaultFormatter: NumberFormatter {
         let formatter = NumberFormatter()
@@ -211,5 +205,4 @@ extension BitUnit {
         formatter.maximumFractionDigits = 2
         return formatter
     }
-
 }

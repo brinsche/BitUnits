@@ -4,8 +4,8 @@ Utility library to convert and format SI and IEC bit and byte units.
 ## Samples
 #### Converting
 ````swift
-//Ints return an optional, because we only support values >= 0.
-//In case you can guarantee this, it’s safe to force unwrap the return value
+// Ints return an optional, because we only support values >= 0.
+// In case you can guarantee this, it’s safe to force unwrap the return value
 
 let value = UInt(4)
 let x = BitUnit.convert(value, from: .Megabit, to: .Kilobit)
